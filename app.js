@@ -5,6 +5,7 @@ const express = require('express');
 
 var app = express();
 
+
 var transporter = nodemailer.createTransport({
     host: "smtp-mail.outlook.com", // hostname
     secureConnection: false, // TLS requires secureConnection to be false
@@ -52,7 +53,7 @@ app.get('/sendMail', function(req, res) {
 
 });
 
-app.listen(3000, function() {
+app.listen(8080, function() {
     console.log("Server STarted");
 });
 
