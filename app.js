@@ -4,7 +4,7 @@ const nodemailer = require('nodemailer');
 const express = require('express');
 
 var app = express();
-
+var port = process.env.PORT || 8080;
 
 var transporter = nodemailer.createTransport({
     host: "smtp-mail.outlook.com", // hostname
@@ -53,7 +53,7 @@ app.get('/sendMail', function(req, res) {
 
 });
 
-app.listen(8080, function() {
+app.listen(port, function() {
     console.log("Server STarted");
 });
 
