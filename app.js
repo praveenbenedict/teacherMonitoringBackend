@@ -34,12 +34,21 @@ app.get('/sendMail', function(req, res) {
     console.log(eventName);
     console.log(lastDate);
 
+
+    var mailText = `Registration: \n Event Name: ${eventName} 
+                        \n Last Date: ${lastDate}\n
+                        Make sure you collect the event details from me by tomorrow`; 
+    var mailHtml = `<h2>Registration: </h2><br/>
+                    <h4> Event Name: ${eventName} </h4> 
+                    <h4> Last Date: ${lastDate} </h4>
+                    <h4><b>Make sure you collect the event details from me by tomorrow</b></h4>`; 
+
     let mailOptions = {
         from: '"HOD IT Department Student Affairs" <jbapraveen@hotmail.com>', // sender address
         to: toMail, // list of receivers
         subject: "Registration for " + eventName, // Subject line
-        text: 'Hello world?', // plain text body
-        html: '<b>Hello world?</b>' // html body
+        text: mailText, // plain text body
+        html: mailHtml // html body
     };
 
     transporter.sendMail(mailOptions, (error, info) => {
