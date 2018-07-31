@@ -20,6 +20,10 @@ var transporter = nodemailer.createTransport({
 });
 
 
+app.get('/', function(req, res){
+    res.send("Poda");
+});
+
 app.get('/sendMail', function(req, res) {
 
     var toMail = req.query.mail;
