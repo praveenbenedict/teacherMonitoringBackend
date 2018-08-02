@@ -68,8 +68,8 @@ cron.schedule('0 46 8 * * *', function () {
 app.get('/', function (req, res) {
     res.send("Poda");
     var currentDate = new Date();
-    console.log("Hours " + currentDate.getHours);
-    console.log("Minutes " + currentDate.getMinutes);
+    console.log("Hours " + currentDate.getHours());
+    console.log("Minutes " + currentDate.getMinutes());
 });
 
 app.get('/sendMail', function (req, res) {
