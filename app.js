@@ -35,7 +35,7 @@ var transporter = nodemailer.createTransport({
     }
 });
 
-cron.schedule('0 46 8 * * *', function () {
+cron.schedule('0 0 9 * * *', function () {
     console.log('Poda');
     var database = firebase.database();
     database.ref('/currentlyAssigned/').once('value', function (data) {
