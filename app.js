@@ -11,6 +11,8 @@ var port = process.env.PORT || 8080;
 var firebase = require('firebase');
 var serviceAccount = require('./config/serviceAccountKey.json');
 
+var currentDate = new Date();
+console.log(currentDate.getDate());
 
 var config = {
     apiKey: "AIzaSyCd52jgPUaWnYQ52g4EOHFgAk5F-_gajBg",
