@@ -11,10 +11,8 @@ var port = process.env.PORT || 8080;
 var firebase = require('firebase');
 var serviceAccount = require('./config/serviceAccountKey.json');
 
-// admin.initializeApp({
-//     credential: admin.credential.cert(serviceAccount),
-//     databaseURL: 'https://teacher-monitoring-syste-2a943.firebaseio.com'
-// });
+var dateTodate = new Date();
+console.log(dateTodate.getTime());
 
 var config = {
     apiKey: "AIzaSyCd52jgPUaWnYQ52g4EOHFgAk5F-_gajBg",
