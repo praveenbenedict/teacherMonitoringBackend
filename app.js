@@ -11,9 +11,6 @@ var port = process.env.PORT || 8080;
 var firebase = require('firebase');
 var serviceAccount = require('./config/serviceAccountKey.json');
 
-var currentDate = new Date();
-console.log(currentDate.getDate());
-
 var config = {
     apiKey: "AIzaSyCd52jgPUaWnYQ52g4EOHFgAk5F-_gajBg",
     authDomain: "teacher-monitoring-syste-2a943.firebaseapp.com",
@@ -38,41 +35,43 @@ var transporter = nodemailer.createTransport({
     }
 });
 
-cron.schedule('0 46 8 * * *', function() {
+cron.schedule('0 46 8 * * *', function () {
     console.log('Poda');
     var database = firebase.database();
-    database.ref('/currentlyAssigned/').once('value', function(data) {
+    database.ref('/currentlyAssigned/').once('value', function (data) {
         data = data.val();
         console.log('Poda');
         console.log(data);
-        for(key in data) {
+        for (key in data) {
             var lastDate = new Date(data[key].lastDate);
             var currentDate = new Date();
             var timeDifference = Math.abs(lastDate.getTime() - currentDate.getTime());
             var dateDifference = Math.ceil(timeDifference / (1000 * 3600 * 24));
             console.log(dateDifference);
-            if(dateDifference <= 2) {
+            if (dateDifference <= 2) {
                 console.log(data[key].eventName);
                 console.log(key);
                 var subject = 'Sumbit final report';
                 var bodyText = `Submition: \n Event Name: ${data[key].eventName} 
                     \n Last Date: ${data[key].lastDate}\n
-                    Make sure you submit the event details to me by tomorrow`; 
+                    Make sure you submit the event details to me by tomorrow`;
                 var bodyHtml = `<h2>Submition: </h2><br/>
                     <h4> Event Name: ${data[key].eventName} </h4> 
                     <h4> Last Date: ${data[key].lastDate} </h4>
-                    <h4><b>Make sure you submit the event details to me by tomorrow</b></h4>`; 
-                sendMail(data[key].eventName,data[key].lastDate, data[key].mailId, bodyText, bodyHtml);
+                    <h4><b>Make sure you submit the event details to me by tomorrow</b></h4>`;
+                sendMail(data[key].eventName, data[key].lastDate, data[key].mailId, bodyText, bodyHtml);
             }
         }
     });
 });
 
-app.get('/', function(req, res){
+app.get('/', function (req, res) {
     res.send("Poda");
+    var currentDate = new Date();
+    console.log(currentDate.getDate());
 });
 
-app.get('/sendMail', function(req, res) {
+app.get('/sendMail', function (req, res) {
     var toMail = req.query.mail;
     var eventName = req.query.eventName;
     var lastDate = req.query.lastDate;
@@ -80,17 +79,17 @@ app.get('/sendMail', function(req, res) {
 
     var mailText = `Registration: \n Event Name: ${eventName} 
                         \n Last Date: ${lastDate}\n
-                        Make sure you collect the event details from me by tomorrow`; 
+                        Make sure you collect the event details from me by tomorrow`;
     var mailHtml = `<h2>Registration: </h2><br/>
                     <h4> Event Name: ${eventName} </h4> 
                     <h4> Last Date: ${lastDate} </h4>
-                    <h4><b>Make sure you collect the event details from me by tomorrow</b></h4>`; 
+                    <h4><b>Make sure you collect the event details from me by tomorrow</b></h4>`;
 
     sendMail(eventName, lastDate, toMail, mailText, mailHtml);
 
 });
 
-function sendMail(eventName, lastDate, toMail,bodyText, bodyHtml ) {
+function sendMail(eventName, lastDate, toMail, bodyText, bodyHtml) {
     console.log('Sending mail');
     let mailOptions = {
         from: '"HOD IT Department Student Affairs" <jbapraveen@hotmail.com>', // sender address
@@ -105,10 +104,10 @@ function sendMail(eventName, lastDate, toMail,bodyText, bodyHtml ) {
         }
         console.log('Message sent: %s', info.messageId);
         // Preview only available when sending through an Ethereal account
-        console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));    
+        console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
     });
 }
 
-app.listen(port, function() {
+app.listen(port, function () {
     console.log("Server Started");
 });
