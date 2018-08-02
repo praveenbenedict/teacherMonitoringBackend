@@ -59,6 +59,7 @@ cron.schedule('0 0 9 * * *', function () {
                     <h4> Event Name: ${data[key].eventName} </h4> 
                     <h4> Last Date: ${data[key].lastDate} </h4>
                     <h4><b>Make sure you submit the event details to me by tomorrow</b></h4>`;
+                console.log(data[key].mailId);
                 sendMail(data[key].eventName, data[key].lastDate, data[key].mailId, bodyText, bodyHtml);
             }
         }
