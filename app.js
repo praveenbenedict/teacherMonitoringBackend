@@ -35,22 +35,18 @@ var transporter = nodemailer.createTransport({
     }
 });
 
-cron.schedule('0 9 9 * * *', function () {
+cron.schedule('0 20 9 * * *', function () {
     console.log('Poda');
     var database = firebase.database();
     database.ref('/currentlyAssigned/').once('value', function (data) {
         data = data.val();
-        console.log('Poda');
-        console.log(data);
         for (key in data) {
             var lastDate = new Date(data[key].lastDate);
             var currentDate = new Date();
             var timeDifference = Math.abs(lastDate.getTime() - currentDate.getTime());
             var dateDifference = Math.ceil(timeDifference / (1000 * 3600 * 24));
-            console.log(dateDifference);
+            
             if (dateDifference <= 2) {
-                console.log(data[key].eventName);
-                console.log(key);
                 var subject = 'Sumbit final report';
                 var bodyText = `Submition: \n Event Name: ${data[key].eventName} 
                     \n Last Date: ${data[key].lastDate}\n
