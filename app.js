@@ -11,8 +11,6 @@ var port = process.env.PORT || 8080;
 var firebase = require('firebase');
 var serviceAccount = require('./config/serviceAccountKey.json');
 
-var dateTodate = new Date();
-console.log(dateTodate.getTime());
 
 var config = {
     apiKey: "AIzaSyCd52jgPUaWnYQ52g4EOHFgAk5F-_gajBg",
@@ -38,7 +36,7 @@ var transporter = nodemailer.createTransport({
     }
 });
 
-cron.schedule('0 58 13 * * *', function() {
+cron.schedule('0 46 8 * * *', function() {
     console.log('Poda');
     var database = firebase.database();
     database.ref('/currentlyAssigned/').once('value', function(data) {
@@ -51,7 +49,7 @@ cron.schedule('0 58 13 * * *', function() {
             var timeDifference = Math.abs(lastDate.getTime() - currentDate.getTime());
             var dateDifference = Math.ceil(timeDifference / (1000 * 3600 * 24));
             console.log(dateDifference);
-            if(dateDifference === 2) {
+            if(dateDifference <= 2) {
                 console.log(data[key].eventName);
                 console.log(key);
                 var subject = 'Sumbit final report';
