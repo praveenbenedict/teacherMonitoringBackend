@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="/static/css/login.css">
+</head>
+
+<body>
+
+    <h1>Login Page</h1>
+
+    <form action="/login" method ="post">
+  
+        <input type="text" name = "email" placeholder="Mail"/>
+        <input type="password" name = "password" placeholder="password">
+        <input type="submit" value="Login">
+
+    </form>
+
+    <script src="//www.gstatic.com/firebasejs/5.3.0/firebase.js"></script>
+    <script src="//code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyCd52jgPUaWnYQ52g4EOHFgAk5F-_gajBg",
+            authDomain: "teacher-monitoring-syste-2a943.firebaseapp.com",
+            databaseURL: "https://teacher-monitoring-syste-2a943.firebaseio.com",
+            projectId: "teacher-monitoring-syste-2a943",
+            storageBucket: "teacher-monitoring-syste-2a943.appspot.com",
+            messagingSenderId: "397902686650"
+        };
+        firebase.initializeApp(config);
+
+    </script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="script/login.js"></script>
+
+
+</body>
+
+</html>
